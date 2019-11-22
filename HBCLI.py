@@ -11,7 +11,7 @@ for i in tbd:
     print("The run is {}".format(i))
     start = dt.datetime.now()
 
-    cmd = 'HandBrakeCLI --preset-import-file MO{0}.json -Z "MO{1}" -i Stuber.mp4 -o Stuber{2}.mp4'.format(
+    cmd = 'HandBrakeCLI --preset-import-file MO{0}.json -Z "MO{1}" -i INPUT_FILE.mp4 -o OUTPUT_FILE_SETTING{2}.mp4'.format(
         i, i, i
     )
     print(cmd)
