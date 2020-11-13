@@ -1,0 +1,8 @@
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+.vscode/
+secrets.py
+*.pyc
+*_pycache_/
+/_pycache_/
+
