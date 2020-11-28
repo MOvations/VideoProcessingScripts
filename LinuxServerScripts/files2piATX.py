@@ -66,8 +66,10 @@ track = {}
 if os.path.exists(str(log_location + "/pick")):
     with open(str(log_location + "/pick"), "rb") as p:
         track = pickle.load(p)
+
+pp = pprint.PrettyPrinter(indent=4, width=60)
 print("\n\n##################### PICKLE FILE ##################################")
-pprint.pprint(track)
+pppprint(track)
 print("####################################################################")
 
 
@@ -165,7 +167,7 @@ for fold in dropbox_folders:
 
 # print the tracking file
 print("##################### PICKLE FILE ##################################")
-pprint.pprint(track)
+pp.pprint(track)
 print("####################################################################\n\n")
 
 # Need to account for changes made to track since files have been transfered here....
