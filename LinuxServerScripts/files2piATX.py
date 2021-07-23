@@ -60,6 +60,17 @@ plex_folders = {
     "StandUp": "/media/Plex/Entertainment/StandupComedy/",
 }
 
+local_folders = {
+    "MoviesBulk": "/mnt/back24/Entertainment/MoviesBulk/",
+    "MoviesSS": "/mnt/back24/Entertainment/MoviesSS/",
+    "ShowsTV": "/mnt/back24/Entertainment/ShowsTV/",
+    "FamAnimated": "/mnt/back24/Entertainment/FamAnimated/",
+    "DocuSeries": "/mnt/back24/Entertainment/Documentaries/",
+    "WebShows": "/mnt/back24/Entertainment/WebShows/",
+    "ExerciseWorkout": "/mnt/back24/Entertainment/ExerciseWorkout/",
+    "StandUp": "/mnt/back24/Entertainment/StandupComedy/",
+}
+
 ### LOGGING ###
 
 track = {}
@@ -69,7 +80,7 @@ if os.path.exists(str(log_location + "/pick")):
 
 pp = pprint.PrettyPrinter(indent=4, width=60)
 print("\n\n##################### PICKLE FILE ##################################")
-pppprint(track)
+pp.pprint(track)
 print("####################################################################")
 
 
@@ -139,15 +150,24 @@ for fold in dropbox_folders:
         else:
             #     # # cmd = opener + "scp " + OUT[fold] + "*.* " + device + ":" + IN[fold]
             #     # And now for some GD reason the source filename takes the native filename, but the output needs. the nuance
-            cmd_copy_file = (
+            remote_copy_file = (
                 f"{opener_scp}{identity_key_loc}"
                 f"{dropbox_folders[fold]}{file}"
                 f" {server_hostname_ip}:"
                 f"{plex_folders[fold]}"
             )
             # print(f"Found {file} in {dropbox_folders[fold]} Which is new")
-            print("\n" + cmd_copy_file)
-            os.system(cmd_copy_file)
+            print("\n" + remote_copy_file)
+            os.system(remote_copy_file)
+
+            local_copy_file = (
+                f"cp "
+                + f"{dropbox_folders[fold]}{file}"
+                + " "
+                + f"{local_folders[fold]}"
+            )
+            print("\n" + local_copy_file)
+            os.system(local_copy_file)
 
         if not str(original_filename) in track.keys():
             now = dt.now().strftime("%d/%m/%y %H:%M")
